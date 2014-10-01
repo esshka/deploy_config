@@ -1,0 +1,15 @@
+doc/
+*.swp
+*~
+.project
+.DS_Store
+.sass-cache
+*.iws
+.idea/
+/config/database.yml
+/config/database.example.yml
+/config/environment_variables.yml
+/public/uploads
+.rvmrc
+.ruby-version
+.ruby-gemset

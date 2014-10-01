@@ -1,0 +1,43 @@
+server {
+  server_name www.<%= fetch(:server_name) %>;
+  rewrite ^(.*) http://<%= fetch(:server_name) %>$1 permanent;
+}
+
+server {
+  listen 80;
+  server_name <%= fetch(:server_name) %>;
+  root <%= fetch(:deploy_to) %>/current/public;
+
+  location ^~ /assets/ {
+    gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+  }
+
+  error_page 500 502 503 504 /500.html;
+  client_max_body_size 4G;
+  keepalive_timeout 10;
+}
+
+<% if fetch(:enable_ssl) %>
+server {
+  server_name <%= fetch(:server_name) %>;
+  listen 443;
+  root <%= fetch(:deploy_to) %>/current/public;
+
+  location ^~ /assets/ {
+    gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+  }
+
+  try_files $uri/index.html $uri @unicorn;
+
+  error_page 500 502 503 504 /500.html;
+  client_max_body_size 4G;
+  keepalive_timeout 10;
+  ssl on;
+  ssl_certificate <%= fetch(:deploy_to) %>/shared/ssl_cert.crt;
+  ssl_certificate_key <%= fetch(:deploy_to) %>/shared/ssl_private_key.key;
+}#
+<% end %>
