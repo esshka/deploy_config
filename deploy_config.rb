@@ -46,8 +46,8 @@ gsub_file 'config/deploy.rb', '__APP_NAME__', Rails.application.class.parent_nam
 copy_file 'config/deploy/shared/database.example.yml.erb', 'config/deploy/shared/database.example.yml.erb'
 copy_file 'config/deploy/shared/environment_variables.example.yml.erb', 'config/deploy/shared/environment_variables.example.yml.erb'
 copy_file 'config/deploy/shared/nginx.conf.erb', 'config/deploy/shared/nginx.conf.erb'
-copy_file 'config/deploy/shared/unicorn.rb.erb', 'config/deploy/shared/unicorn.rb.erb'
-copy_file 'config/deploy/shared/unicorn_init.sh.erb', 'config/deploy/shared/unicorn_init.sh.erb'
+copy_file 'config/deploy/shared/sidekiq.yml.erb', 'config/deploy/shared/sidekiq.yml.erb'
+copy_file 'config/deploy/shared/sidekiq_init.sh.erb', 'config/deploy/shared/sidekiq_init.sh.erb'
 
 copy_file 'lib/capistrano/substitute_strings.rb', 'lib/capistrano/substitute_strings.rb'
 copy_file 'lib/capistrano/template.rb', 'lib/capistrano/template.rb'

@@ -24,13 +24,15 @@ set(:config_files, %w(
   nginx.conf
   database.example.yml
   environment_variables.example.yml
+  sidekiq.yml
+  sidekiq_init.sh
 ))
 
 # which config files should be made executable after copying
 # by deploy:setup_config
-# set(:executable_config_files, %w(
-  
-# ))
+set(:executable_config_files, %w(
+   sidekiq_init.sh
+))
 
 # files which need to be symlinked to other parts of the
 # filesystem. For example nginx virtualhosts, log rotation
@@ -40,6 +42,10 @@ set(:symlinks, [
         source: 'nginx.conf',
         link: "/opt/nginx/conf/sites-enabled/{{full_app_name}}"
     },
+    {
+      source: "sidekiq_init.sh",
+      link: "/etc/init.d/sidekiq_{{full_app_name}}"
+    }
 ])
 
 
